@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BeyondContact</title>
+<meta name="description" content="Airflow-assisted manipulation: gripper-assisted box pushing and rectangular reorientation with Piper-L.">
+<link rel="stylesheet" href="styles.css"><script src="script.js" defer></script>
+</head>
+<body>
+<header class="site-header" data-header>
+<a class="brand" href="#top"><span class="brand-mark" aria-hidden="true"></span><span>BeyondContact</span></a>
+<nav class="site-nav" aria-label="Primary navigation"><a href="#platform">Platform</a><a href="#physics">Physics</a><a href="#tasks">Tasks</a><a href="#install">Get started</a></nav>
+</header>
+<main id="top">
+<section class="hero" aria-labelledby="hero-title"><div class="hero-shade" aria-hidden="true"></div><div class="hero-content"><p class="eyebrow">Anonymous research release</p><h1 id="hero-title">BeyondContact</h1><p class="hero-copy">Airflow-assisted manipulation with Piper-L: learning to move and reorient objects through directed airflow and gripper assistance.</p></div></section>
+<section class="section section-tight" id="platform"><div class="section-heading"><p class="eyebrow">Research platform</p><h2>Airflow physics and two manipulation tasks</h2><p>A reusable Isaac Lab extension connects batched airflow forces to reinforcement learning environments.</p></div><div class="module-grid">
+<article class="module-card"><p class="module-index">01</p><h3>Blower extension</h3><p>Configurable jet physics, surface force and torque integration, target objects and debug visualisation.</p></article>
+<article class="module-card"><p class="module-index">02</p><h3>Gripper-assisted box pushing</h3><p>Piper-L controls the blower and uses gripper assistance to move a box into a target region.</p></article>
+<article class="module-card"><p class="module-index">03</p><h3>Rectangular reorientation</h3><p>Move a cuboid toward its target position and orientation with a learned manipulation policy.</p></article>
+</div></section>
+<section class="section flow-section" id="physics"><div class="flow-heading"><div><p class="eyebrow">Airflow physics</p><h2>From jet velocity to object motion</h2></div><p>The shared extension evaluates a Gaussian free-jet profile and integrates forces and torques across sampled object surfaces.</p></div><div class="compact-points"><span>Batched PyTorch model</span><span>Surface sampling</span><span>Force and torque integration</span><span>Configurable visualisation</span></div></section>
+<section class="section flow-section" id="tasks"><div class="section-heading"><p class="eyebrow">Reinforcement learning</p><h2>Two tasks, one Piper-L platform</h2><p>Manager-based environments with joint-position and airflow actions, task-specific rewards and PPO training through RSL-RL. Each task includes a Play configuration for evaluation.</p></div><div class="task-strip"><span>GripperAssistBoxPush</span><span>GripperAssistCuboidOrientation</span></div><p>The rectangular reorientation task retains the CuboidOrientation identifier in the code. Pretrained checkpoints are not included in this release.</p></section>
+<section class="section install-section" id="install"><div class="section-heading"><p class="eyebrow">Get started</p><h2>Install the airflow extension, then the RL framework</h2><p>Use an environment with Isaac Sim 5.1.0, compatible Isaac Lab, Python 3.11, PyTorch and RSL-RL.</p></div><div class="command-block"><span>python -m pip install -e external_blower/blower/source/blower</span><span>python -m pip install -e blower_arm_rl/source/blower_arm_rl</span><span>python blower_arm_rl/scripts/rsl_rl/train.py --task Isaac-Blower-Piper-GripperAssistBoxPush-v0 --headless</span><span>python blower_arm_rl/scripts/rsl_rl/train.py --task Isaac-Blower-Piper-GripperAssistCuboidOrientation-v0 --headless</span></div></section>
+</main><footer class="site-footer"><span>BeyondContact · Anonymous Authors</span><span>Isaac Sim + Isaac Lab</span></footer>
+</body></html>

@@ -1,0 +1,30 @@
+[package]
+
+# Semantic Versioning is used: https://semver.org/
+version = "0.1.0"
+
+# Description
+category = "isaaclab"
+readme  = "README.md"
+
+title = "BeyondContact Blower"
+author = "Anonymous Authors"
+maintainer = "Anonymous Authors"
+description = "Reusable airflow blower components for Isaac Lab environments"
+repository = ""
+keywords = ["airflow", "blower", "isaaclab", "extension"]
+
+[dependencies]
+"isaaclab" = {}
+
+[[python.module]]
+name = "blower"
+
+[isaac_lab_settings]
+# TODO: Uncomment and list any apt dependencies here.
+#       If none, leave it commented out.
+# apt_deps = ["example_package"]
+# TODO: Uncomment and provide path to a ros_ws
+#       with rosdeps to be installed. If none,
+#       leave it commented out.
+# ros_ws = "path/from/extension_root/to/ros_ws"
