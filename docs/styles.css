@@ -795,7 +795,7 @@ section[id] {
 }
 
 .physics-panel .split-heading {
-  margin-bottom:30px;
+  margin-bottom:0;
   gap:40px;
   grid-template-columns:1fr 1.25fr;
 }

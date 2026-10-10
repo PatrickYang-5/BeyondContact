@@ -32,25 +32,25 @@ The paper evaluates **zero-shot sim-to-real deployment**, with no real-world pol
 
 ## Demonstrations
 
-### Hybrid push–blow: contact + airflow
+### Hybrid push–blow:
 
 The policy first pushes the cube into a position suitable for blowing, then adjusts the nozzle direction and airflow to guide it into the target region. Once the cube arrives, the airflow command decreases to zero. For targets within gripper reach, the policy primarily uses contact-based manipulation.
 
 See the looping HPB demonstration in [Results](#experimental-results). The full experiment compilation is available on the [project website](#project-website).
 
-### Rectangular reorientation: airflow only
+### Rectangular reorientation:
 
-The robot continuously adjusts the blowing direction to rotate a cuboid toward a target heading. The task penalizes and terminates gripper–object contact, so heading control relies on airflow.
+The robot continuously adjusts the blowing direction to rotate a cuboid toward a target heading.
 
-See the looping demonstrations for 60°, 90°, and 135° in [Results](#experimental-results). The paper also evaluates 120°; all four target headings are reported there. Full trial recordings are available on the [project website](#project-website).
+See the looping demonstrations for 60°, 90°, and 135° in [Results](#experimental-results). Full trial recordings are available on the [project website](#project-website).
 
 ## How it works
 
 ### Hardware
 
-A **40 mm electric ducted fan** is housed in a 3D-printed enclosure beneath the gripper. A magnetic connection supports interchangeable nozzles; the evaluated nozzle has a **31.7 mm outlet**. An ESP32 microcontroller regulates the blower through an electronic speed controller.
+A **40 mm EDF** is housed in a enclosure beneath the gripper. A magnetic connection supports interchangeable nozzles. An ESP32 microcontroller regulates the blower through an ESC.
 
-The paper reports maximum hardware capabilities of **78 m/s air velocity** and **5.9 N static thrust**. These maxima differ from the lower settings used for airflow identification and training.
+The blower can achieve a maximum air velocity of **78 m/s** and a static thrust of **5.9 N**. We limit the blower output during identification and training to accommodate the anemometer's measurement range and the task configuration.
 
 <p align="center">
   <a href="docs/assets/hardware-system.webp">
@@ -58,43 +58,24 @@ The paper reports maximum hardware capabilities of **78 m/s air velocity** and *
   </a>
 </p>
 
-### Airflow modeling and surface integration
+### Airflow modeling
 
-The extension represents a time-averaged, quasi-steady round jet using an identified centerline-decay function and Gaussian radial spreading. It supports cuboids, spheres, cylinders, and mesh-based objects from USD assets.
-
-1. Sample each object's surface into positions, outward normals, and areas.
-2. Evaluate local airflow velocity at each surface primitive.
-3. Compute aerodynamic forces on surfaces facing the incoming jet.
-4. Sum the forces and their moment arms into net force and torque; apply them through Isaac Sim / PhysX.
-
-**Surface integration captures the torque caused by uneven airflow coverage**, which is essential for reorientation. The extension also supports an approximate reaction force on the link carrying the blower.
-
-<p align="center">
-  <a href="docs/assets/airflow-pipeline.webp">
-    <img src="docs/assets/airflow-pipeline.webp" width="560" alt="Airflow extension: surface sampling, projected area, jet configuration, and force computation">
-  </a>
-</p>
-
-The paper compares exponential and shifted-inverse decay models. The shifted-inverse model achieves **0.895 m/s centerline RMSE** with the evaluated nozzle; the exponential model performs better for the bare fan, achieving **0.606 m/s RMSE**. The model does not explicitly resolve rotor swirl, instantaneous turbulence, or interactions with nearby environmental surfaces.
+We experimentally identify the airflow profile of the blower and nozzle, then use surface integration to convert airflow into object forces and torques.
 
 ### Reinforcement learning
 
-Both tasks use PPO with an asymmetric actor–critic. The actor receives observations available during deployment: ten-step joint position and velocity histories, object pose, the task goal, and previous actions. The critic also receives privileged simulation information.
+Both tasks use PPO with an asymmetric actor–critic. The details of the training configurations are:
 
-- **Actions:** robot joint-position commands and airflow intensity.
+- **Actions:** robot joint-position commands and airflow action.
 - **Architecture reported in the paper:** actor and critic MLPs with `[512, 256, 128]` hidden dimensions and ELU activations.
 - **Robustness:** domain randomization over object mass, friction, robot gains, and airflow parameters.
-- **Rewards:** task progress and stable completion, with regularization for smooth arm motion and efficient airflow use.
 - **Reported training setup:** 4,096 environments, 5,000 iterations, NVIDIA RTX 5090 and Intel U7 265K.
 
-Paper settings describe the reported experiments. Check the [released PPO configuration](blower_arm_rl/source/blower_arm_rl/blower_arm_rl/tasks/manager_based/piper_blower_rl/agents/rsl_rl_ppo_cfg.py) and task configurations for current release defaults, which may differ.
+Check the [released PPO configuration](blower_arm_rl/source/blower_arm_rl/blower_arm_rl/tasks/manager_based/piper_blower_rl/agents/rsl_rl_ppo_cfg.py) and task configurations.
 
 ## Experimental results
 
-| Task | Simulation success | Real-world evaluation | Reported training time |
-| --- | --- | --- | --- |
-| Hybrid push–blow (HPB) | 88% | **80%** · 16 / 20 trials | 5.7 h |
-| Rectangular reorientation (RR) | 92% | **2.60°** mean absolute heading error · 4 headings | 6.6 h |
+We validated both tasks on physical Piper-L robotics arm.
 
 ### Real-world demonstrations
 
@@ -121,19 +102,7 @@ Paper settings describe the reported experiments. Check the [released PPO config
   </tr>
 </table>
 
-For HPB, the target is a **20 × 20 cm square centered 1.3 m in front of the robot base**. For RR, all four final headings are within the paper's **±10° tolerance**:
-
-| Target heading | Final heading | Absolute error |
-| :---: | :---: | :---: |
-| 60° | 61.58° | 1.58° |
-| 90° | 84.47° | 5.53° |
-| 120° | 123.18° | 3.18° |
-| 135° | 134.88° | 0.12° |
-
-These are the evaluations reported in the supplied manuscript. The four RR headings are not a repeated-trial success-rate estimate; simulation success and real-world heading error are different metrics.
-
-<details>
-<summary>View deployment sequences and measured traces</summary>
+For HPB, the target is a **20 × 20 cm square centered 1.3 m in front of the robot base**. For RR, we setted four trails commanded at different final headings:
 
 **HPB:** measured joint angles and airflow command through pushing, blowing, and settling.
 
@@ -143,9 +112,6 @@ These are the evaluations reported in the supplied manuscript. The four RR headi
 
 ![RR deployment sequence and measured heading trajectories](docs/assets/rr-results.webp)
 
-</details>
-
-The fixed 6-DoF arm limits the nozzle positions and directions available for recovery. HPB failures involved aggressive pushing or unintended contact during blowing. The paper proposes a mobile base or a 7-DoF arm as future directions for expanding the operating range and improving recovery.
 
 ## Included components
 
@@ -155,30 +121,24 @@ The fixed 6-DoF arm limits the nozzle positions and directions available for rec
 | [`blower_arm_rl`](blower_arm_rl) | Piper-L task configurations, PPO training, and checkpoint evaluation |
 | [`docs`](docs) | Static project website and optimized presentation media |
 
-Only the following tasks and their `-Play-v0` variants are registered:
+Registered training tasks:
 
 | Paper task | Gym ID |
 | --- | --- |
 | Hybrid push–blow (HPB) | `Isaac-Blower-Piper-GripperAssistBoxPush-v0` |
 | Rectangular reorientation (RR) | `Isaac-Blower-Piper-GripperAssistCuboidOrientation-v0` |
 
-The RR task retains the `GripperAssistCuboidOrientation` code identifier for compatibility; its behavior is airflow-only reorientation. Shared base configurations and MDP utilities are retained as dependencies and do not register additional tasks.
-
-**Release scope:** no pretrained checkpoints, training logs, real-robot deployment code, or fabrication-ready blower design files are bundled with the code release. Hardware figures describe the paper's system. Presentation figures and videos are available under `docs/assets/`.
-
 ## Installation
 
-Use an isolated environment with **Isaac Sim 5.1.0**, a compatible Isaac Lab installation, **Python 3.11**, PyTorch, and RSL-RL. Simulator dependencies are not bundled. Follow the [Isaac Lab installation guide](https://isaac-sim.github.io/IsaacLab/main/source/setup/installation/index.html).
+Use an environment with **Isaac Sim 5.1.0**, an Isaac Lab installation, **Python 3.11**, PyTorch, and RSL-RL. Follow the [Isaac Lab installation guide](https://isaac-sim.github.io/IsaacLab/main/source/setup/installation/index.html).
 
-Run from this repository root using that environment's Python:
+Run from this repository root using these Python commands:
 
 ```bash
 python -m pip install -e external_blower/blower/source/blower
 python -m pip install -e blower_arm_rl/source/blower_arm_rl
 python blower_arm_rl/scripts/list_envs.py
 ```
-
-Editable installs are required because robot and object assets are resolved relative to the source checkout. Keep this checkout separate from other projects and use a separate environment if those projects install packages with the same names.
 
 ## Train
 
@@ -202,27 +162,12 @@ python blower_arm_rl/scripts/rsl_rl/play.py --task Isaac-Blower-Piper-GripperAss
 python blower_arm_rl/scripts/rsl_rl/play.py --task Isaac-Blower-Piper-GripperAssistCuboidOrientation-Play-v0 --num_envs 1 --checkpoint /path/to/model.pt
 ```
 
-## Checks
-
-```bash
-python external_blower/blower/examples/check_airflow_model.py
-python -m pytest blower_arm_rl/test -q
-```
-
-Run simulator training in the compatible Isaac Sim / Isaac Lab environment described above.
-
 ## Project website
 
-The research page opens with looping real-world demonstrations and includes selectable RR target headings, expandable full recordings, hardware and airflow figures, quantitative results, and setup commands. It uses local assets and requires no frontend build step.
+The research page uses local assets and requires no frontend build step.
 
 ```bash
 python -m http.server 8000 --directory docs
 ```
 
-Visit **http://localhost:8000**. The site is self-contained in `docs/`, including its optimized figures, looping GIFs, and H.264 videos. README images reuse these same assets. Original high-resolution materials are kept locally in `figs/`, which is excluded from Git through `.gitignore`; this directory is not required to serve the site.
-
-During anonymous review, share the site through an anonymous project URL. After the anonymous review stage, the `docs` folder can be used as the GitHub Pages publishing root.
-
-## Third-party notices
-
-Existing third-party copyright and SPDX notices are preserved. This release does not assign a new blanket license to third-party code or assets.
+Visit **http://localhost:8000**. The site is self-contained in `docs/`, including its optimized figures, looping GIFs, and videos.
