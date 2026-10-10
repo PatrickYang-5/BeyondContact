@@ -8,28 +8,6 @@ Anonymous research release · Reinforcement learning · Grippers and other end-e
 
 [Overview](#overview) · [Demonstrations](#demonstrations) · [Results](#experimental-results) · [Installation](#installation) · [Training](#train) · [Project website](#project-website)
 
-<table>
-  <tr>
-    <td width="50%" align="center">
-      <strong>Hybrid push–blow · HPB</strong><br>
-      <img src="docs/assets/airflow.gif" width="520" alt="Looping real-world demonstration of hybrid pushing and airflow transport">
-    </td>
-    <td width="50%" align="center">
-      <strong>Airflow-only reorientation · 90°</strong><br>
-      <img src="docs/assets/airflow90.gif" width="520" alt="Looping real-world cuboid reorientation toward a 90-degree target">
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" align="center">
-      <strong>Airflow-only reorientation · 60°</strong><br>
-      <img src="docs/assets/airflow60.gif" width="520" alt="Looping real-world cuboid reorientation toward a 60-degree target">
-    </td>
-    <td width="50%" align="center">
-      <strong>Airflow-only reorientation · 135°</strong><br>
-      <img src="docs/assets/airflow135.gif" width="520" alt="Looping real-world cuboid reorientation toward a 135-degree target">
-    </td>
-  </tr>
-</table>
 
 </div>
 
@@ -57,7 +35,7 @@ The paper evaluates **zero-shot sim-to-real deployment**, with no real-world pol
 
 The policy first pushes the cube into a position suitable for blowing, then adjusts the nozzle direction and airflow to guide it into the target region. Once the cube arrives, the airflow command decreases to zero. For targets within gripper reach, the policy primarily uses contact-based manipulation.
 
-[Watch / download the HPB compilation](docs/assets/hybrid-push-blow.mp4) · approximately 5 minutes. The animated demonstrations at the top play automatically; the [project website](#project-website) also provides the full recording.
+[Watch / download the HPB compilation](docs/assets/hybrid-push-blow.mp4) · approximately 5 minutes. The animated demonstrations in [Results](#experimental-results) play automatically; the [project website](#project-website) also provides the full recording.
 
 ### Rectangular reorientation: airflow only
 
@@ -108,6 +86,31 @@ Paper settings describe the reported experiments. Check the [released PPO config
 | --- | --- | --- | --- |
 | Hybrid push–blow (HPB) | 88% | **80%** · 16 / 20 trials | 5.7 h |
 | Rectangular reorientation (RR) | 92% | **2.60°** mean absolute heading error · 4 headings | 6.6 h |
+
+### Real-world demonstrations
+
+<table>
+  <tr>
+    <td width="50%" align="center">
+      <strong>Hybrid push–blow</strong><br>HPB<br>
+      <img src="docs/assets/airflow.gif" width="280" alt="Looping real-world demonstration of hybrid pushing and airflow transport">
+    </td>
+    <td width="50%" align="center">
+      <strong>Reorientation · 90°</strong><br>Airflow only<br>
+      <img src="docs/assets/airflow90.gif" width="280" alt="Looping real-world cuboid reorientation toward a 90-degree target">
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" align="center">
+      <strong>Reorientation · 60°</strong><br>Airflow only<br>
+      <img src="docs/assets/airflow60.gif" width="280" alt="Looping real-world cuboid reorientation toward a 60-degree target">
+    </td>
+    <td width="50%" align="center">
+      <strong>Reorientation · 135°</strong><br>Airflow only<br>
+      <img src="docs/assets/airflow135.gif" width="280" alt="Looping real-world cuboid reorientation toward a 135-degree target">
+    </td>
+  </tr>
+</table>
 
 For HPB, the target is a **20 × 20 cm square centered 1.3 m in front of the robot base**. For RR, all four final headings are within the paper's **±10° tolerance**:
 
