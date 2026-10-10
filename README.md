@@ -51,7 +51,11 @@ A **40 mm electric ducted fan** is housed in a 3D-printed enclosure beneath the 
 
 The paper reports maximum hardware capabilities of **78 m/s air velocity** and **5.9 N static thrust**. These maxima differ from the lower settings used for airflow identification and training.
 
-![Custom blower assembly and control architecture](docs/assets/hardware-system.webp)
+<p align="center">
+  <a href="docs/assets/hardware-system.webp">
+    <img src="docs/assets/hardware-system.webp" width="420" alt="Custom blower assembly and control architecture">
+  </a>
+</p>
 
 ### Airflow modeling and surface integration
 
@@ -64,7 +68,11 @@ The extension represents a time-averaged, quasi-steady round jet using an identi
 
 **Surface integration captures the torque caused by uneven airflow coverage**, which is essential for reorientation. The extension also supports an approximate reaction force on the link carrying the blower.
 
-![Airflow extension: surface sampling, projected area, jet configuration, and force computation](docs/assets/airflow-pipeline.webp)
+<p align="center">
+  <a href="docs/assets/airflow-pipeline.webp">
+    <img src="docs/assets/airflow-pipeline.webp" width="560" alt="Airflow extension: surface sampling, projected area, jet configuration, and force computation">
+  </a>
+</p>
 
 The paper compares exponential and shifted-inverse decay models. The shifted-inverse model achieves **0.895 m/s centerline RMSE** with the evaluated nozzle; the exponential model performs better for the bare fan, achieving **0.606 m/s RMSE**. The model does not explicitly resolve rotor swirl, instantaneous turbulence, or interactions with nearby environmental surfaces.
 
