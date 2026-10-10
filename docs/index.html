@@ -15,7 +15,7 @@
   <header class="site-header" data-header>
     <a class="brand" href="#top" aria-label="BeyondContact home"><span class="brand-mark" aria-hidden="true">↗</span>BeyondContact<span class="brand-dot">.</span></a>
     <nav class="site-nav" aria-label="Primary navigation">
-      <a href="#overview">Overview</a><a href="#demos">Demos</a><a href="#method">Method</a><a href="#results">Results</a><a class="nav-cta" href="#reproduce">Get started <span aria-hidden="true">↗</span></a>
+      <a href="#demos">Demos</a><a href="#overview">Overview</a><a href="#method">Method</a><a href="#results">Results</a><a class="nav-cta" href="#reproduce">Get started <span aria-hidden="true">↗</span></a>
     </nav>
   </header>
   <main id="main">
@@ -27,10 +27,10 @@
         <p class="paper-title">A Reinforcement Learning Framework for Airflow-Based Non-Contact Manipulation</p>
         <p class="hero-copy">One robotic arm. A gripper and a compact blower. Learned policies that combine pushing with airflow to extend manipulation beyond direct reach—and rotate objects with airflow alone.</p>
         <div class="hero-actions"><a class="button button-primary" href="#demos">Watch the robot <span aria-hidden="true">↗</span></a><a class="button button-secondary" href="#method">Explore the method <span aria-hidden="true">↓</span></a></div>
-        <p class="hero-note">Trained in simulation. Evaluated on a physical Piper-L robot.</p>
+        <p class="hero-note">Trained in simulation. Evaluated on a physical Piper-L robot.</p><button class="animation-toggle" type="button" data-animation-toggle aria-pressed="false">Pause animations</button>
       </div>
       <figure class="hero-visual">
-        <a href="#demos" aria-label="Watch real-world airflow manipulation demonstrations"><img src="assets/hpb-poster.webp" width="1280" height="720" fetchpriority="high" alt="A blower-equipped Piper-L arm aims airflow at a tagged cube on a tabletop, toward a distant target region."><span class="visual-label"><span class="status-dot" aria-hidden="true"></span> Real-world deployment</span><span class="watch-label">See it in action <span aria-hidden="true">↗</span></span></a>
+        <a href="#demos" aria-label="Watch real-world airflow manipulation demonstrations"><picture class="demo-animation"><source media="(prefers-reduced-motion: reduce)" srcset="assets/hpb-poster.webp" width="1280" height="640"><img src="assets/airflow.gif" width="480" height="300" fetchpriority="high" alt="A looping real-world demonstration of the Piper-L robot combining pushing with airflow to transport a cube." data-animation data-gif="assets/airflow.gif" data-still="assets/hpb-poster.webp"></picture><span class="visual-label"><span class="status-dot" aria-hidden="true"></span> Real-world deployment</span><span class="watch-label">Explore the trials <span aria-hidden="true">↗</span></span></a>
         <figcaption><span>Contact + airflow</span><span>A new way to reach further.</span></figcaption>
         <div class="visual-footnote"><span class="tiny-label">THE IDEA</span><p>The gripper gets the object into position.<br>The air takes it further.</p><span class="airflow-mark" aria-hidden="true">≋</span></div>
       </figure>
@@ -43,8 +43,32 @@
       <div><p class="metric-value">1.3<span> m</span></p><p class="metric-label">HPB target distance</p><p class="metric-detail">From the robot base</p></div>
     </section>
 
+    <section class="demo-band" id="demos" aria-labelledby="demos-title"><div class="section">
+      <div class="section-heading split-heading"><div><p class="eyebrow">01 / See the policies in action</p><h2 id="demos-title">Learned in simulation.<br>Demonstrated in the real world.</h2></div><p>The paper evaluates zero-shot deployment: policies trained in simulation run on the physical robot without real-world policy fine-tuning.</p></div>
+      <div class="demo-grid">
+        <article class="demo-card">
+          <div class="demo-title"><span class="task-badge">HPB</span><span class="tiny-label">CONTACT + AIRFLOW</span></div>
+          <h3>Hybrid push–blow</h3><p>Push into position, aim the nozzle, and blow the cube into a distant target region. Reduce airflow once the object arrives.</p>
+          <picture class="demo-animation"><source media="(prefers-reduced-motion: reduce)" srcset="assets/hpb-poster.webp" width="1280" height="640"><img src="assets/airflow.gif" width="480" height="300" loading="lazy" alt="Looping real-world hybrid push–blow demonstration." data-animation data-gif="assets/airflow.gif" data-still="assets/hpb-poster.webp"></picture>
+          <details class="recording-details"><summary>Full experiment recording · 5:00</summary><video controls playsinline preload="none" poster="assets/hpb-poster.webp" width="1280" height="640" aria-label="Real-world hybrid push–blow experiments" data-demo-video><source src="assets/hybrid-push-blow.mp4" type="video/mp4">Your browser does not support embedded video. <a href="assets/hybrid-push-blow.mp4">Download the HPB video</a>.</video></details>
+          <div class="video-caption"><span>Real-world demonstration · looping excerpt</span><a href="assets/hybrid-push-blow.mp4" download>Download ↗</a></div>
+          <ol class="behavior-steps"><li><span>1</span> Push</li><li><span>2</span> Aim &amp; blow</li><li><span>3</span> Settle</li></ol>
+        </article>
+        <article class="demo-card">
+          <div class="demo-title"><span class="task-badge badge-teal">RR</span><span class="tiny-label">AIRFLOW ONLY</span></div>
+          <h3>Rectangular reorientation</h3><p>Adjust the blowing direction to turn the cuboid toward a target heading, then reduce airflow as the object aligns.</p>
+          <picture class="demo-animation"><source id="rr-still" media="(prefers-reduced-motion: reduce)" srcset="assets/rr-90-poster.webp" width="1280" height="720"><img id="rr-gif" src="assets/airflow90.gif" width="480" height="300" loading="lazy" alt="Looping airflow-only cuboid reorientation toward 90 degrees." data-animation data-gif="assets/airflow90.gif" data-still="assets/rr-90-poster.webp"></picture>
+          <details class="recording-details"><summary>Full trial recording</summary><video id="rr-video" controls playsinline preload="none" poster="assets/rr-90-poster.webp" width="1280" height="720" aria-label="Real-world rectangular reorientation toward 90 degrees" data-demo-video><source src="assets/rr-90.mp4" type="video/mp4">Your browser does not support embedded video. <a href="assets/rr-90.mp4">Download the 90° video</a>.</video></details>
+          <div class="video-caption"><span id="rr-caption" aria-live="polite">Target heading: 90° · Real-world trial</span><a id="rr-download" href="assets/rr-90.mp4" download>Download ↗</a></div>
+          <div class="angle-controls" aria-label="Choose a reorientation video"><span>Target heading</span><button type="button" data-angle="60" aria-controls="rr-gif rr-video" aria-pressed="false">60°</button><button type="button" data-angle="90" aria-controls="rr-gif rr-video" aria-pressed="true">90°</button><button type="button" data-angle="135" aria-controls="rr-gif rr-video" aria-pressed="false">135°</button></div>
+          <noscript><p>Other trials: <a href="assets/rr-60.mp4">60° video</a> · <a href="assets/rr-135.mp4">135° video</a>.</p></noscript>
+        </article>
+      </div>
+      <p class="demo-note">Clips are provided for 60°, 90°, and 135°. The paper also evaluates 120°; all four headings are reported below. The looping previews show the supplied demonstration excerpts; expand a recording for video playback. Full videos play at their original speed and are served without audio.</p>
+    </div></section>
+
     <section class="section overview-section" id="overview" aria-labelledby="overview-title">
-      <div class="section-heading split-heading"><div><p class="eyebrow">01 / The big picture</p><h2 id="overview-title">Manipulation doesn't<br>have to end at the gripper.</h2></div><p>Physical contact ties manipulation to end-effector reach. Directed airflow adds another way to act on an object. BeyondContact connects the hardware, the physics, and robot learning in one framework.</p></div>
+      <div class="section-heading split-heading"><div><p class="eyebrow">02 / The big picture</p><h2 id="overview-title">Manipulation doesn't<br>have to end at the gripper.</h2></div><p>Physical contact ties manipulation to end-effector reach. Directed airflow adds another way to act on an object. BeyondContact connects the hardware, the physics, and robot learning in one framework.</p></div>
       <figure class="research-figure overview-figure"><a href="assets/framework.webp" target="_blank" rel="noopener" aria-label="Open the framework overview at full size"><img src="assets/framework.webp" width="2400" height="822" loading="lazy" alt="Framework overview connecting the custom blower and Piper-L robot, configurable airflow extension, parallel simulation, policy training, and real-world deployment."></a><figcaption><span><strong>From hardware to learned behavior.</strong> A calibrated airflow model supplies object forces and torques in simulation; trained policies are then deployed on the physical robot.</span><a href="assets/framework.webp" target="_blank" rel="noopener">Full-size figure ↗</a></figcaption></figure>
       <div class="contributions">
         <article><span class="contribution-number">01</span><h3>A blower beside the gripper</h3><p>A compact electric ducted fan mounts below the gripper, preserving contact manipulation while adding directed airflow.</p></article>
@@ -52,28 +76,6 @@
         <article><span class="contribution-number">03</span><h3>Two complementary skills</h3><p>Hybrid push–blow transports objects beyond direct reach. Rectangular reorientation controls heading using airflow alone.</p></article>
       </div>
     </section>
-
-    <section class="demo-band" id="demos" aria-labelledby="demos-title"><div class="section">
-      <div class="section-heading split-heading"><div><p class="eyebrow">02 / See the policies in action</p><h2 id="demos-title">Learned in simulation.<br>Demonstrated in the real world.</h2></div><p>The paper evaluates zero-shot deployment: policies trained in simulation run on the physical robot without real-world policy fine-tuning.</p></div>
-      <div class="demo-grid">
-        <article class="demo-card">
-          <div class="demo-title"><span class="task-badge">HPB</span><span class="tiny-label">CONTACT + AIRFLOW</span></div>
-          <h3>Hybrid push–blow</h3><p>Push into position, aim the nozzle, and blow the cube into a distant target region. Reduce airflow once the object arrives.</p>
-          <video controls playsinline preload="none" poster="assets/hpb-poster.webp" width="1280" height="720" aria-label="Real-world hybrid push–blow experiments" data-demo-video><source src="assets/hybrid-push-blow.mp4" type="video/mp4">Your browser does not support embedded video. <a href="assets/hybrid-push-blow.mp4">Download the HPB video</a>.</video>
-          <div class="video-caption"><span>Real-world experiment compilation · 5:00</span><a href="assets/hybrid-push-blow.mp4" download>Download ↗</a></div>
-          <ol class="behavior-steps"><li><span>1</span> Push</li><li><span>2</span> Aim &amp; blow</li><li><span>3</span> Settle</li></ol>
-        </article>
-        <article class="demo-card">
-          <div class="demo-title"><span class="task-badge badge-teal">RR</span><span class="tiny-label">AIRFLOW ONLY</span></div>
-          <h3>Rectangular reorientation</h3><p>Adjust the blowing direction to turn the cuboid toward a target heading, then reduce airflow as the object aligns.</p>
-          <video id="rr-video" controls playsinline preload="none" poster="assets/rr-90-poster.webp" width="1280" height="720" aria-label="Real-world rectangular reorientation toward 90 degrees" data-demo-video><source src="assets/rr-90.mp4" type="video/mp4">Your browser does not support embedded video. <a href="assets/rr-90.mp4">Download the 90° video</a>.</video>
-          <div class="video-caption"><span id="rr-caption" aria-live="polite">Target heading: 90° · Real-world trial</span><a id="rr-download" href="assets/rr-90.mp4" download>Download ↗</a></div>
-          <div class="angle-controls" aria-label="Choose a reorientation video"><span>Target heading</span><button type="button" data-angle="60" aria-controls="rr-video" aria-pressed="false">60°</button><button type="button" data-angle="90" aria-controls="rr-video" aria-pressed="true">90°</button><button type="button" data-angle="135" aria-controls="rr-video" aria-pressed="false">135°</button></div>
-          <noscript><p>Other trials: <a href="assets/rr-60.mp4">60° video</a> · <a href="assets/rr-135.mp4">135° video</a>.</p></noscript>
-        </article>
-      </div>
-      <p class="demo-note">Clips are provided for 60°, 90°, and 135°. The paper also evaluates 120°; all four headings are reported below. Videos play at their original speed and are served without audio.</p>
-    </div></section>
 
     <section class="section" id="method" aria-labelledby="method-title">
       <div class="section-heading"><p class="eyebrow">03 / Hardware, physics, learning</p><h2 id="method-title">Make the air learnable.</h2><p>Start with a measured jet. Translate its effect into object motion. Learn how to position the nozzle and regulate the airflow.</p></div>

@@ -35,6 +35,20 @@ videos.forEach((video) => {
 });
 
 const rrVideo = document.querySelector("#rr-video");
+const rrGif = document.querySelector("#rr-gif");
+const animations = [...document.querySelectorAll("[data-animation]")];
+const animationToggle = document.querySelector("[data-animation-toggle]");
+let animationsPaused = false;
+
+animationToggle?.addEventListener("click", () => {
+  animationsPaused = !animationsPaused;
+  animations.forEach((animation) => {
+    animation.src = animationsPaused ? animation.dataset.still : animation.dataset.gif;
+  });
+  animationToggle.textContent = animationsPaused ? "Resume animations" : "Pause animations";
+  animationToggle.setAttribute("aria-pressed", String(animationsPaused));
+});
+
 const angleButtons = [...document.querySelectorAll("[data-angle]")];
 angleButtons.forEach((button) => {
   button.addEventListener("click", () => {
@@ -45,6 +59,11 @@ angleButtons.forEach((button) => {
     rrVideo.poster = `assets/rr-${angle}-poster.webp`;
     rrVideo.setAttribute("aria-label", `Real-world rectangular reorientation toward ${angle} degrees`);
     rrVideo.load();
+    rrGif.dataset.gif = `assets/airflow${angle}.gif`;
+    rrGif.dataset.still = `assets/rr-${angle}-poster.webp`;
+    rrGif.src = animationsPaused ? rrGif.dataset.still : rrGif.dataset.gif;
+    rrGif.alt = `Looping airflow-only cuboid reorientation toward ${angle} degrees.`;
+    document.querySelector("#rr-still").srcset = rrGif.dataset.still;
     document.querySelector("#rr-caption").textContent = `Target heading: ${angle}° · Real-world trial`;
     document.querySelector("#rr-download").href = `assets/rr-${angle}.mp4`;
     angleButtons.forEach((item) => item.setAttribute("aria-pressed", String(item === button)));

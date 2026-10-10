@@ -337,6 +337,27 @@ section[id] {
   object-position:48% center;
 }
 
+.demo-animation {
+  display:block;
+}
+
+.hero-visual .demo-animation img {
+  height:auto;
+  aspect-ratio:auto;
+  object-fit:contain;
+}
+
+.animation-toggle {
+  padding:0;
+  margin-top:12px;
+  border:0;
+  background:transparent;
+  color:var(--teal-dark);
+  font-size:.72rem;
+  text-decoration:underline;
+  text-underline-offset:3px;
+}
+
 .visual-label {
   position:absolute;
   top:18px;
@@ -599,9 +620,26 @@ section[id] {
   display:block;
   width:100%;
   height:auto;
-  aspect-ratio:16/9;
   background:#111b23;
   border-radius:7px;
+}
+
+.demo-card .demo-animation img {
+  width:100%;
+  height:auto;
+  border-radius:7px;
+}
+
+.recording-details {
+  margin-top:14px;
+  border-top:1px solid #ffffff26;
+  font-size:.75rem;
+  color:#c0ccd4;
+}
+
+.recording-details summary {
+  padding:12px 0;
+  cursor:pointer;
 }
 
 .video-caption {
@@ -1505,6 +1543,9 @@ pre code {
 @media(prefers-reduced-motion:reduce) {
   html {
     scroll-behavior:auto;
+  }
+  .animation-toggle {
+    display:none;
   }
   *,*::before,*::after {
     transition:none!important;
