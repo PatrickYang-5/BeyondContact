@@ -458,6 +458,12 @@ section[id] {
 .research-figure img {
   width:100%;
   height:auto;
+  background:#fff;
+}
+
+.research-figure>a {
+  display:block;
+  background:#fff;
 }
 
 .research-figure figcaption {

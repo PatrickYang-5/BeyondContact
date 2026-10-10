@@ -15,7 +15,13 @@ These optimized assets are shared by the project website and root README. The we
 | `rr-90.mp4` | `figs/90度.mp4` |
 | `rr-135.mp4` | `figs/135度.mp4` |
 
-Figures retain their original aspect ratios, use WebP at quality 90, and are limited to 1,400–2,400 pixels in width. Embedded figures link to these larger versions. Image metadata is omitted.
+Figures retain their original aspect ratios, use WebP at quality 90, and are limited to 1,400–2,400 pixels in width. Source transparency is composited onto an opaque white background before export, so figures remain white-backed in both the website and README, including dark-mode viewers. Opaque artwork and photographs retain their original colors. Embedded figures link to these larger versions. Image metadata is omitted.
+
+To regenerate the figures from the local originals, run from the repository root with Python and Pillow installed:
+
+```bash
+python scripts/prepare_web_figures.py
+```
 
 Videos are H.264, 1280 × 720, 30 fps, YUV 4:2:0, encoded with CRF 26 and the fast preset. MP4 `faststart` places the playback metadata before the video payload. Full durations and playback speed are preserved; the web copies omit audio. RR clips are approximately 16, 9, and 9 seconds; the HPB compilation is approximately 5 minutes.
 
