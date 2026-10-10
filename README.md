@@ -28,7 +28,7 @@ The paper evaluates **zero-shot sim-to-real deployment**, with no real-world pol
 
 | Isaac Lab extension | Hardware design | Training tasks | Real-world HPB success | Real-world RR heading error |
 | :---: | :---: | :---: | :---: | :---: |
-| **1** · reusable airflow extension | **1** · gripper-compatible blower design | **2** · HPB and RR | **80%** · 16 / 20 trials | **2.60°** mean absolute error · 4 headings |
+| **1** · reusable airflow extension | **1** · gripper-compatible blower design | **2** · HPB and RR | **80%** · 16 / 20 trials | **2.60°** MAE · 4 headings |
 
 ## Demonstrations
 
