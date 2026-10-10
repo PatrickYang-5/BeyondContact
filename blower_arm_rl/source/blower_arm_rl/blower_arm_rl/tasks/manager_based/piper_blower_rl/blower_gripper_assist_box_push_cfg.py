@@ -181,7 +181,7 @@ class PiperBlowerGripperAssistBoxPushEnvCfg(PiperBlowerBoxPushInitEnvCfg):
         self.box_push.curriculum.goal_center_range_min_steps_between_updates = 1500
 
         # Keep task progress dominant, with close upstream positioning and precise aiming.
-        self.box_push.rewards.alive_weight = 0.05
+        self.box_push.rewards.alive_weight = 0.0
         self.box_push.rewards.box_goal_dense_weight = 2.0
         self.box_push.rewards.box_goal_progress_weight = 3.0
         self.box_push.rewards.box_velocity_toward_goal_weight = 0.0  # Previous weight: 2.0; duplicates goal progress.
@@ -236,8 +236,8 @@ class PiperBlowerGripperAssistBoxPushEnvCfg(PiperBlowerBoxPushInitEnvCfg):
 
         self.box_push.rewards.airflow_energy_weight = -0.08
         self.box_push.rewards.airflow_rate_weight = -0.08
-        self.box_push.rewards.airflow_penalty_warmup_steps = 30000
-        self.box_push.rewards.airflow_penalty_ramp_steps = 50000
+        self.box_push.rewards.airflow_penalty_warmup_steps = 5000
+        self.box_push.rewards.airflow_penalty_ramp_steps = 10000
         self.box_push.rewards.airflow_penalty_start_scale = 0.0
         self.box_push.rewards.arm_action_deviation_weight = -0.005
         self.box_push.rewards.arm_action_deviation_warmup_steps = 10000

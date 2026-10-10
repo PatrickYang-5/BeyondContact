@@ -125,6 +125,17 @@ class PiperBlowerGripperAssistCuboidOrientationEnvCfg(PiperBlowerGripperAssistBo
 
     def __post_init__(self):
         super().__post_init__()
+        # RR uses its own 30k-80k airflow penalty schedule. The parent has
+        # already wired reward terms, so update both metadata and term params.
+        reward_cfg = self.box_push.rewards
+        reward_cfg.airflow_penalty_warmup_steps = 30000
+        reward_cfg.airflow_penalty_ramp_steps = 50000
+        for name in ("airflow_energy", "airflow_rate", "airflow_before_ready",
+                     "blower_nozzle_low_height", "blower_downward_pitch"):
+            getattr(self.rewards, name).params.update(
+                penalty_warmup_steps=reward_cfg.airflow_penalty_warmup_steps,
+                penalty_ramp_steps=reward_cfg.airflow_penalty_ramp_steps,
+            )
         task = self.cuboid_orientation
         stages = len(task.tolerance_deg)
         for name in ("hold_s", "command_half_range_deg", "spawn_bounds"):
