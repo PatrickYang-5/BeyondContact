@@ -40,7 +40,7 @@ git push -u origin main
 
 ## 4. 网页
 
-`docs/` 中已准备静态网页。匿名阶段不要给审稿人发送包含真实组织名称的 GitHub Pages 地址。
+`docs/` 中已准备静态网页，`docs/assets/` 包含网页与 README 共用的优化图片和视频。发布时保留完整 `docs/` 目录；网页不依赖根目录的 `figs/` 或论文 PDF。匿名阶段不要给审稿人发送包含真实组织名称的 GitHub Pages 地址。
 
 如果匿名服务界面提供静态网页发布功能，配置入口为 `docs/index.html`，并检查 CSS、JavaScript 和页面链接均通过匿名地址加载。仓库浏览链接不等于网页已发布；需要实际验证。若服务不提供该功能，先通过匿名仓库分享网页源文件，正式公开后再启用 GitHub Pages。
 
