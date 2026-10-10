@@ -423,7 +423,7 @@ section[id] {
 
 .metrics {
   display:grid;
-  grid-template-columns:repeat(4,1fr);
+  grid-template-columns:repeat(5,minmax(0,1fr));
   padding-block:30px 36px;
   border-block:1px solid var(--line);
 }
@@ -1354,8 +1354,12 @@ pre code {
     padding-left:0!important;
     border-right:1px solid var(--line);
   }
-  .metrics>div:nth-child(-n+2) {
+  .metrics>div:nth-child(-n+4) {
     border-bottom:1px solid var(--line);
+  }
+  .metrics>div:last-child {
+    grid-column:1/-1;
+    border-right:0;
   }
   .metric-value {
     font-size:2.6rem;

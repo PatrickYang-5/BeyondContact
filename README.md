@@ -13,21 +13,22 @@ Anonymous research release · Reinforcement learning · Grippers and other end-e
 
 ## Overview
 
-Contact-based manipulation depends on where a robot's gripper can reach. **BeyondContact adds directed airflow as a second way to act on an object**: a compact blower coexists with the gripper, while a learned policy controls the arm and airflow together.
+ Contact-based robotic manipulation is constrained by end-effector reachability and the mechanical properties of objects. Airflow can exert forces without physical contact, enabling manipulation of objects beyond the workspace or when direct contact is undesirable. Here we propose BeyondContact, a reinforcement learning framework for airflow-based non-contact manipulation.
 
-![BeyondContact framework: custom blower hardware, calibrated airflow simulation, parallel policy training, and physical robot deployment](docs/assets/framework.webp)
+![BeyondContact framework: custom blower hardware, airflow modeling, RL policy training, and physical robot deployment](docs/assets/framework.webp)
 
-The framework connects three components:
+The framework includes:
 
-- **Gripper-compatible hardware.** A custom blower beneath the Piper-L gripper preserves contact manipulation and adds non-contact airflow actuation.
-- **A reusable airflow extension.** Experimentally identified jet decay and radial spreading are mapped to object forces and torques through batched surface integration in Isaac Lab.
-- **Two complementary learned skills.** Hybrid push–blow (HPB) combines pushing and blowing to transport objects beyond direct reach. Rectangular reorientation (RR) rotates a cuboid using airflow alone.
+- **An airflow extension:** Develop a configurable and computationally efficient airflow-interaction module used in Isaac Lab, supporting massively parallel robot-learning environments.
+- **Gripper-compatible hardware:** Design a lightweight, high-speed blower that coexists with the gripper, delivering a maximum air velocity of 78m/s and a static thrust of up to 5.9N (600gf).
+- **Airflow modeling:** Experimentally identify centerline-decay and radial-spreading models for custom blowers and nozzles.
+- **RL training frameworks:** Propose RL training frameworks that enable two different tasks.
 
 The paper evaluates **zero-shot sim-to-real deployment**, with no real-world policy fine-tuning.
 
-| Real-world HPB success | Real-world RR heading error | Parallel training | HPB target distance |
-| :---: | :---: | :---: | :---: |
-| **80%** · 16 / 20 trials | **2.60°** mean absolute error · 4 headings | **4,096** environments | **1.3 m** from the robot base |
+| Isaac Lab extension | Hardware design | Training tasks | Real-world HPB success | Real-world RR heading error |
+| :---: | :---: | :---: | :---: | :---: |
+| **1** · reusable airflow extension | **1** · gripper-compatible blower design | **2** · HPB and RR | **80%** · 16 / 20 trials | **2.60°** mean absolute error · 4 headings |
 
 ## Demonstrations
 
