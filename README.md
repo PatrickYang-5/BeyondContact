@@ -35,13 +35,13 @@ The paper evaluates **zero-shot sim-to-real deployment**, with no real-world pol
 
 The policy first pushes the cube into a position suitable for blowing, then adjusts the nozzle direction and airflow to guide it into the target region. Once the cube arrives, the airflow command decreases to zero. For targets within gripper reach, the policy primarily uses contact-based manipulation.
 
-[Watch / download the HPB compilation](docs/assets/hybrid-push-blow.mp4) · approximately 5 minutes. The animated demonstrations in [Results](#experimental-results) play automatically; the [project website](#project-website) also provides the full recording.
+See the looping HPB demonstration in [Results](#experimental-results). The full experiment compilation is available on the [project website](#project-website).
 
 ### Rectangular reorientation: airflow only
 
 The robot continuously adjusts the blowing direction to rotate a cuboid toward a target heading. The task penalizes and terminates gripper–object contact, so heading control relies on airflow.
 
-Real-world clips: [60°](docs/assets/rr-60.mp4) · [90°](docs/assets/rr-90.mp4) · [135°](docs/assets/rr-135.mp4). The paper also evaluates 120°; a corresponding video is not included in the supplied clips. Videos preserve their original speed and are served without audio.
+See the looping demonstrations for 60°, 90°, and 135° in [Results](#experimental-results). The paper also evaluates 120°; all four target headings are reported there. Full trial recordings are available on the [project website](#project-website).
 
 ## How it works
 
