@@ -11,6 +11,8 @@ These optimized assets are shared by the project website and root README. The we
 | `hpb-results.webp` | `figs/HPB.png` |
 | `rr-results.webp` | `figs/RR.png` |
 | `hybrid-push-blow.mp4` | `figs/hybrid_push_blow.mp4` |
+| `project-overview.mp4` | `figs/Video_11.1.mp4` |
+| `project-overview-poster.webp` | `figs/Video_page.png` |
 | `rr-60.mp4` | `figs/60度.mp4` |
 | `rr-90.mp4` | `figs/90度.mp4` |
 | `rr-135.mp4` | `figs/135度.mp4` |
@@ -37,6 +39,8 @@ To regenerate the GIFs, cropped HPB video, and matching poster with Python, Pill
 python scripts/prepare_demo_media.py
 ```
 
-Use `--only gifs` or `--only hpb` to update one group, or `--ffmpeg /path/to/ffmpeg` to use an installed FFmpeg executable.
+Use `--only gifs`, `--only hpb`, or `--only project` to update one group, or `--ffmpeg /path/to/ffmpeg` to use an installed FFmpeg executable.
+
+The project overview appears below the page title, before the Overview section. Its web copy is 1920 × 1080 H.264 at 30 fps, CRF 23, with YUV 4:2:0 and MP4 `faststart`. Unlike the trial recordings, it retains the source audio (AAC, 128 kb/s). The full duration of approximately 3:44 is preserved, and the WebP poster is generated from `figs/Video_page.png` at its original dimensions. The player loads the video on demand and does not autoplay. Regenerate both assets with `python scripts/prepare_demo_media.py --only project`.
 
 Posters are WebP frames extracted at 20 seconds for HPB and at the beginning for RR. All public-facing filenames use ASCII. Keep these derivatives in the published `docs/` tree, and retain the source media separately when making future edits.

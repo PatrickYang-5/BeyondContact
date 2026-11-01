@@ -7,7 +7,7 @@
   <title>BeyondContact — Airflow-Based Non-Contact Manipulation</title>
   <meta name="description" content="BeyondContact: an Isaac Lab airflow extension, a gripper-compatible blower design, and two reinforcement learning tasks. Real-world demonstrations and experimental results.">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=20261101-video-layout">
   <script src="script.js" defer></script>
 </head>
 <body>
@@ -32,6 +32,20 @@
       <p class="paper-title">A Reinforcement Learning Framework for<br class="title-break"> Airflow-Based Non-Contact Manipulation</p>
       <p class="authors">Anonymous authors</p>
       <p class="hero-copy">We equip a robotic arm with a compact blower and train policies to enable non-contact manipulation.</p>
+    </section>
+
+    <section class="section" id="project-video" aria-labelledby="project-video-title">
+      <div class="section-heading">
+        <h2 id="project-video-title">Project video</h2>
+        <p>An introduction to the framework, airflow modeling, and real-world experiments.</p>
+      </div>
+      <figure class="research-figure project-video">
+        <video controls playsinline preload="none" poster="assets/project-overview-poster.webp" width="800" height="450" aria-label="BeyondContact project overview and experiments" data-demo-video>
+          <source src="assets/project-overview.mp4" type="video/mp4">
+          Your browser does not support embedded video. <a href="assets/project-overview.mp4">Download the project video</a>.
+        </video>
+        <figcaption><span>BeyondContact · Project overview · 3:44</span><a href="assets/project-overview.mp4" download>Download video</a></figcaption>
+      </figure>
     </section>
 
     <section class="section" id="overview" aria-labelledby="overview-title">
@@ -153,7 +167,7 @@
       <p class="small-note">Training times were measured on an NVIDIA RTX 5090 with an Intel U7 265K.</p>
       <div class="trace-grid">
         <figure class="research-figure"><a href="assets/hpb-results.webp" target="_blank" rel="noopener"><img src="assets/hpb-results.webp" width="2400" height="1029" loading="lazy" alt="HPB deployment sequence and measured joint angles and airflow command."></a><figcaption>HPB: deployment sequence and measurements.</figcaption></figure>
-        <figure class="research-figure"><a href="assets/rr-results.webp" target="_blank" rel="noopener"><img src="assets/rr-results.webp" width="2400" height="1724" loading="lazy" alt="RR deployment sequences, measured joint and airflow traces, and heading trajectories."></a><figcaption>RR: deployment sequence and heading trajectories.</figcaption></figure>
+        <figure class="research-figure"><a href="assets/rr-results.webp?v=281c18ca1cdd" target="_blank" rel="noopener"><img src="assets/rr-results.webp?v=281c18ca1cdd" width="1600" height="1169" loading="lazy" alt="RR deployment sequences, measured joint and airflow traces, and heading trajectories."></a><figcaption>RR: deployment sequence and heading trajectories.</figcaption></figure>
       </div>
     </section>
 

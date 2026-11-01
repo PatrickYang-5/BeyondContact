@@ -226,6 +226,16 @@ summary:hover { text-decoration: underline; }
 .research-figure figcaption { display: flex; justify-content: space-between; gap: 16px; padding: 12px 16px; background: var(--soft); border-top: 1px solid var(--line); color: var(--muted); font-size: .9rem; line-height: 1.6; }
 .research-figure figcaption a { white-space: nowrap; }
 .overview-figure > a { padding: 18px 16px; }
+.project-video { width: 100%; max-width: 800px; margin-inline: auto; }
+.project-video video {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+  background: #fff;
+}
 .method-row { display: grid; grid-template-columns: 1.15fr 1fr; align-items: start; gap: 48px; }
 .method-copy, .method-text { min-width: 0; }
 .method-points { margin: 0; padding-left: 22px; font-size: 1rem; list-style-type: disc; }
