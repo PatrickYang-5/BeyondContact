@@ -4,7 +4,7 @@
 
 ### A Reinforcement Learning Framework for Airflow-Based Non-Contact Manipulation
 
-Anonymous research release · Reinforcement learning · Grippers and other end-effectors, Non-contact manipulation
+Anonymous research release · Reinforcement learning, Grippers and other end-effectors, Non-contact manipulation
 
 [Overview](#overview) · [Demonstrations](#demonstrations) · [Results](#experimental-results) · [Installation](#installation) · [Training](#train) · [Project website](#project-website)
 
@@ -70,8 +70,6 @@ Both tasks use PPO with an asymmetric actor–critic. The details of the trainin
 - **Architecture reported in the paper:** actor and critic MLPs with `[512, 256, 128]` hidden dimensions and ELU activations.
 - **Robustness:** domain randomization over object mass, friction, robot gains, and airflow parameters.
 - **Reported training setup:** 4,096 environments, 5,000 iterations, NVIDIA RTX 5090 and Intel U7 265K.
-
-Check the [released PPO configuration](blower_arm_rl/source/blower_arm_rl/blower_arm_rl/tasks/manager_based/piper_blower_rl/agents/rsl_rl_ppo_cfg.py) and task configurations.
 
 ## Experimental results
 
