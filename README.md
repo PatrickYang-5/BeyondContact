@@ -48,7 +48,7 @@ See the looping demonstrations for 60°, 90°, and 135° in [Results](#experimen
 
 ### Hardware
 
-A **40 mm EDF** is housed in a enclosure beneath the gripper. A magnetic connection supports interchangeable nozzles. An ESP32 microcontroller regulates the blower through an ESC.
+A **40 mm EDF** is housed in an enclosure beneath the gripper. A magnetic connection supports interchangeable nozzles. An ESP32 microcontroller regulates the blower through an ESC. <strong style="color: #8b0000;">The hardware design files will be released on the project website after the paper is published.</strong>
 
 The blower can achieve a maximum air velocity of **78 m/s** and a static thrust of **5.9 N**. We limit the blower output during identification and training to accommodate the anemometer's measurement range and the task configuration.
 
